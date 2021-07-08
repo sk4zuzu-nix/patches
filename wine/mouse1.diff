@@ -1,0 +1,14 @@
+diff --git a/dlls/winex11.drv/mouse.c b/dlls/winex11.drv/mouse.c
+index 42bac332664..0549c2d653b 100644
+--- a/dlls/winex11.drv/mouse.c
++++ b/dlls/winex11.drv/mouse.c
+@@ -648,6 +648,10 @@ static void send_mouse_input( HWND hwnd, Window window, unsigned int state, INPU
+ 
+     if (!hwnd)
+     {
++        if (input->u.mi.dwFlags & MOUSEEVENTF_RIGHTUP) {
++            reset_clipping_window();
++        }
++
+         struct x11drv_thread_data *thread_data = x11drv_thread_data();
+         HWND clip_hwnd = thread_data->clip_hwnd;
